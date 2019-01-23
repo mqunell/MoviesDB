@@ -1,0 +1,74 @@
+Batman Begins, The Dark Knight, 1, 45
+The Dark Knight, The Dark Knight, 2, 45
+The Dark Knight Rises, The Dark Knight, 3, 45
+Deadpool, Deadpool, 1, 1245
+Anchorman 2: The Legend Continues, Anchorman, 2, 124
+Avengers: Age of Ultron, MCU, 11, 2
+Captain America: Civil War, MCU, 13, 2
+The Campaign, null, null, 2
+Due Date, null, null, 2
+Spider-Man 3, Spider-Man, 3, 2
+Spider-Man: Homecoming, MCU, 16, 1245
+Swordfish, null, null, 2
+The Benchwarmers, null, null, 1
+Disturbed: M.O.L., null, null, 1
+The Bourne Ultimatum, Bourne, 3, 1
+The Bourne Legacy, Bourne, 4, 1
+Inception, null, null, 14
+Land of the Lost, null, null, 1
+The Matrix, Matrix, 1, 1
+Matrix Reloaded, Matrix, 2, 1
+Matrix Revolutions, Matrix, 3, 1
+Memento, null, null, 1
+Napoleon Dynamite, null, null, 1
+Semi-Pro, null, null, 1
+Blades of Glory, null, null, 1
+Step Brothers, null, null, 14
+The Other Guys, null, null, 1
+Talladega Nights: The Ballad of Ricky Bobby, null, null, 1
+21 Jump Street, Jump Street, 1, 45
+22 Jump Street, Jump Street, 2, 45
+Batman v Superman: Dawn of Justice, DCEU, 2, 45
+Big Hero 6, null, null, 45
+Central Intelligence, null, null, 5
+Chappie, null, null, 45
+District 9, null, null, 45
+Elysium, null, null, 45
+Get Out, null, null, 45
+Harry Potter and the Deathly Hallows: Part 2, Harry Potter, 8, 45
+Ice Age, null, null, 45
+The Incredible Hulk, MCU, 2, 5
+Independence Day, null, null, 45
+The Interview, null, null, 5
+Jason Bourne, Bourne, 5, 45
+The Lego Movie, null, null, 5
+Life, null, null, 45
+Maze Runner: The Death Cure, Maze Runner, 3, 5
+Oblivion, null, null, 45
+Popstar: Never Stop Never Stopping, null, null, 45
+Prometheus, Alien, 5, 45
+The Revenant, null, null, 45
+Star Wars: The Last Jedi, Star Wars, 8, 5
+X-Men, X-Men, 1, 5
+Transformers, Transformers, 1, 4
+Transformers: Revenge of the Fallen, Transformers, 2, 4
+Transformers: Dark of the Moon, Transformers, 3, 4
+Transformers: Age of Extinction, Transformers, 4, 4
+Transformers: The Last Knight, Transformers, 5, 4
+2012, null, null, 4
+Chronicle, null, null, 4
+Decade of Disturbed, null, null, 4
+Harry Potter and the Deathly Hallows: Part 1, Harry Potter, 7, 4
+Harry Potter and the Order of the Phoenix, Harry Potter, 5, 4
+I Am Number Four, null, null, 4
+Iron Man, MCU, 1, 4
+Law Abiding Citizen, null, null, 4
+Limitless, null, null, 4
+Meet the Spartans, null, null, 4
+Salt, null, null, 4
+The Day the Earth Stood Still, null, null, 4
+A Quiet Place, null, null, 4
+The Strangers: Prey at Night, The Strangers, 2, 5
+Dodgeball: A True Underdog Story, null, null, 5
+Avengers: Infinity War, MCU, 19, 235
+The Grudge, The Grudge, 1, 5
