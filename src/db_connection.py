@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from src.omdb_api import get_movie_json
-from src.write_sql import query_series_seriesname_sql, add_movie_sql, add_series_sql
+from src.write_sql import query_series_seriesname_sql, add_movie_sql, add_series_sql, query_movies_sql
 
 import json
 import pymysql.cursors
@@ -155,3 +155,18 @@ class DbConnection:
 
         except:
             raise Exception('Exception - add_bulk_sql')
+
+
+    def get_movies(self):
+        """
+        :return: A list of dictionaries where each dictionary is a row in the table.
+        """
+
+        try:
+            with self.connection.cursor() as cursor:
+                sql = query_movies_sql()
+                cursor.execute(sql)
+                return cursor.fetchall()
+
+        except:
+            raise Exception('Exception - get_movies')
