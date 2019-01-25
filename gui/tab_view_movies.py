@@ -17,8 +17,7 @@ class TabViewMovies(QWidget):
         layout.addWidget(movies_view)
         self.setLayout(layout)
 
-        # todo: fix db_connection constructor/method params so passing Nones isn't necessary
-        movies = DbConnection(None, None).get_movies()
+        movies = DbConnection().get_movies()
 
         model = self.create_model(self)
         movies_view.setModel(model)

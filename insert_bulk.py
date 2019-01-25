@@ -1,6 +1,6 @@
 from src.db_connection import DbConnection
 from src.omdb_api import get_movie_json
-from src.write_sql import add_movie_sql, add_series_sql
+from src.sql import add_movie_sql, add_series_sql
 
 """"
 Adds series and movies from text files
@@ -37,6 +37,5 @@ for line in movies_input:
     movie_insertions.append(add_movie_sql(user_data, omdb_data))
 
 
-DbConnection(None, None).add_bulk_sql(series_insertions)
-DbConnection(None, None).add_bulk_sql(movie_insertions)
-#todo: fix db_connection constructor/method params so passing Nones isn't necessary
+DbConnection().add_bulk_sql(series_insertions)
+DbConnection().add_bulk_sql(movie_insertions)

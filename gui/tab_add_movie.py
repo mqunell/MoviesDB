@@ -146,8 +146,8 @@ class TabAddMovie(QWidget):
                          'series_number': self.series_num_textbox.text(),
                          'formats': formats_output}
 
-            # Pass the main GUI window and user_data to Add
-            DbConnection(self.main_gui, user_data).add()
+            # Pass the main GUI window and user_data to add()
+            DbConnection().add(self.main_gui, user_data)
 
         else:
             self.main_gui.statusBar().showMessage('Missing data!')
