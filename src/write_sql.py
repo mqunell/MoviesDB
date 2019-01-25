@@ -1,4 +1,14 @@
-def query_series_sql(series_name):
+def query_movies_sql():
+    """
+    Returns the SQL query to get all movies.
+
+    :return: Formatted SQL string
+    """
+
+    return 'select * from Movie'
+
+
+def query_series_seriesname_sql(series_name):
     """
     Returns the formatted "select SeriesName from Series..." SQL query.
 

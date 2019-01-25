@@ -1,4 +1,4 @@
-from src.db_connection import get_db_connection
+from src.db_connection import DbConnection
 from src.omdb_api import get_movie_json
 from src.write_sql import add_movie_sql, add_series_sql
 
@@ -14,33 +14,29 @@ with open('data/movies.txt', 'r') as movies_input_file:
     movies_input = movies_input_file.read().split('\n')
 
 
-connection = get_db_connection()
+# Insert series data
+series_insertions = []
 
-# Add data to database
-try:
-    with connection.cursor() as cursor:
+for line in series_input:
+    series = line.split(', ')
+    series_insertions.append(add_series_sql(series[0], series[1]))
 
-        # Insert series data
-        for line in series_input:
-            series = line.split(', ')
-            sql = add_series_sql(series[0], series[1])
-            cursor.execute(sql)
 
-        # Insert movies data
-        for line in movies_input:
-            movie = line.split(', ')
+# Insert movies data
+movie_insertions = []
 
-            omdb_data = get_movie_json(movie[0])
-            user_data = {'title': movie[0],
-                         'series_name': movie[1],
-                         'series_number': movie[2],
-                         'formats': movie[3]}
+for line in movies_input:
+    movie = line.split(', ')
 
-            sql = add_movie_sql(user_data, omdb_data)
-            cursor.execute(sql)
+    omdb_data = get_movie_json(movie[0])
+    user_data = {'title': movie[0],
+                 'series_name': movie[1],
+                 'series_number': movie[2],
+                 'formats': movie[3]}
 
-    # Commit the changes
-    connection.commit()
+    movie_insertions.append(add_movie_sql(user_data, omdb_data))
 
-finally:
-    connection.close()
+
+DbConnection(None, None).add_bulk_sql(series_insertions)
+DbConnection(None, None).add_bulk_sql(movie_insertions)
+#todo: fix db_connection constructor/method params so passing Nones isn't necessary

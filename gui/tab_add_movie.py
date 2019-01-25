@@ -1,6 +1,6 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
-from src.add import Add
+from src.db_connection import DbConnection
 
 
 class TabAddMovie(QWidget):
@@ -147,7 +147,7 @@ class TabAddMovie(QWidget):
                          'formats': formats_output}
 
             # Pass the main GUI window and user_data to Add
-            Add(self.main_gui, user_data).add()
+            DbConnection(self.main_gui, user_data).add()
 
         else:
             self.main_gui.statusBar().showMessage('Missing data!')
