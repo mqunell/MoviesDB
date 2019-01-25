@@ -5,18 +5,6 @@ from src.sql import query_series_seriesname_sql, add_movie_sql, add_series_sql, 
 import json
 import pymysql.cursors
 
-"""
-SETUP:
-$ sudo mysql_secure_installation
-
-> create user 'username'@'localhost' identified by 'password';
-> create database Movies;
-> grant all on Movies.* to 'username'@'localhost' identified by 'password';
-
-$ sudo systemctl restart mariadb.service
-
-> source {path}/CreateTables.sql;
-"""
 
 class DbConnection:
 

@@ -32,3 +32,18 @@ Thanks to the OMDb API, the following information about movies is retrieved auto
 * Plot overview
 * Link to poster
 * Metacritic score
+
+---
+
+Database setup:
+```
+$ sudo mysql_secure_installation
+
+> create user 'username'@'localhost' identified by 'password';
+> create database Movies;
+> grant all on Movies.* to 'username'@'localhost' identified by 'password';
+
+$ sudo systemctl restart mariadb.service
+
+> source {path}/CreateTables.sql;
+```
