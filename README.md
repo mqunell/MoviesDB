@@ -1,6 +1,6 @@
 # MoviesDB
 
-![Image of the GUI](https://i.imgur.com/2hFIgrg.png())
+![Image of the GUI](https://i.imgur.com/QYlUK3j.png)
 
 
 <br/>

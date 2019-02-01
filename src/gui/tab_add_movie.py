@@ -93,7 +93,7 @@ class TabAddMovie(QWidget):
         add_button.clicked.connect(self.add_button_clicked)
 
 
-    @pyqtSlot(name='QRadioButton')
+    @pyqtSlot()
     def check_series_radio(self):
         """
         Called when a radio button from "Is it part of a series?" is clicked.
@@ -113,7 +113,7 @@ class TabAddMovie(QWidget):
             self.series_num_textbox.setText('null')
 
 
-    @pyqtSlot(name='QPushButton')
+    @pyqtSlot()
     def add_button_clicked(self):
         """
         Called when the "Add movie to database" button is clicked.

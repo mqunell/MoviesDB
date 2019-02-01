@@ -1,7 +1,8 @@
 import sys
 from PyQt5.QtWidgets import *
-from gui.tab_add_movie import TabAddMovie
-from gui.tab_view_movies import TabViewMovies
+from src.gui.tab_add_movie import TabAddMovie
+from src.gui.tab_add_movies import TabAddMovies
+from src.gui.tab_view_movies import TabViewMovies
 
 
 class App(QMainWindow):
@@ -24,12 +25,12 @@ class App(QMainWindow):
         tabs = QTabWidget()
 
         tab1 = TabAddMovie(self)
-        tab2 = TabViewMovies(self)
-        tab3 = QWidget()
+        tab2 = TabAddMovies(self)
+        tab3 = TabViewMovies(self)
 
-        tabs.addTab(tab1, 'Add Movie')
-        tabs.addTab(tab2, 'View Movies')
-        tabs.addTab(tab3, 'Tab 3')
+        tabs.addTab(tab1, 'Add Movie (Single)')
+        tabs.addTab(tab2, 'Add Movies (Bulk)')
+        tabs.addTab(tab3, 'View Movies')
 
         self.setCentralWidget(tabs)
 
