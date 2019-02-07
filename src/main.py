@@ -11,11 +11,11 @@ class App(QMainWindow):
         super().__init__()
 
         # Set the window's title
-        self.setWindowTitle('Movies DB')
+        self.setWindowTitle('MoviesDB')
 
         # Window dimensions and positioning
-        width = 520
-        height = 485
+        width = 1200
+        height = 600
         left = (1920 - width) / 2
         top = (1080 - height) / 2
         self.setGeometry(left, top, width, height)
@@ -25,26 +25,32 @@ class App(QMainWindow):
         tabs = QTabWidget()
         tabs.currentChanged.connect(self.tab_changed)
 
-        tab1 = TabAddMovie(self)
-        tab2 = TabAddMovies(self)
-        tab3 = TabViewMovies(self)
+        tab1 = TabViewMovies(self)
+        tab2 = TabAddMovie(self)
+        tab3 = TabAddMovies(self)
 
-        tabs.addTab(tab1, 'Add Movie (Single)')
-        tabs.addTab(tab2, 'Add Movies (Bulk)')
-        tabs.addTab(tab3, 'View Movies')
+        tabs.addTab(tab1, 'View Movies')
+        tabs.addTab(tab2, 'Add Movie (Single)')
+        tabs.addTab(tab3, 'Add Movies (Bulk)')
 
         self.setCentralWidget(tabs)
 
 
-    def tab_changed(self, i):
+    def tab_changed(self, tab_index):
         """
         Called automatically when the user changes tabs.
         Note: Since this is called automatically when the GUI is created, it pseudo-creates padding for the status bar.
 
-        :param i: The index of the newly-selected tab.
+        :param tab_index: The index of the newly-selected tab.
         """
 
         self.set_status_bar('')
+
+        if tab_index in (1, 2):
+            self.setGeometry(self.geometry().left(), self.geometry().top(), 520, 485)
+
+        else:
+            self.setGeometry(self.geometry().left(), self.geometry().top(), 1200, 600)
 
 
     def set_status_bar(self, message):
