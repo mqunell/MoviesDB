@@ -23,6 +23,7 @@ class App(QMainWindow):
 
         # Set up the tabs
         tabs = QTabWidget()
+        tabs.currentChanged.connect(self.tab_changed)
 
         tab1 = TabAddMovie(self)
         tab2 = TabAddMovies(self)
@@ -35,7 +36,24 @@ class App(QMainWindow):
         self.setCentralWidget(tabs)
 
 
+    def tab_changed(self, i):
+        """
+        Called automatically when the user changes tabs.
+        Note: Since this is called automatically when the GUI is created, it pseudo-creates padding for the status bar.
+
+        :param i: The index of the newly-selected tab.
+        """
+
+        self.set_status_bar('')
+
+
     def set_status_bar(self, message):
+        """
+        Helper method for setting the status bar message.
+
+        :param message: The message to set.
+        """
+
         self.statusBar().showMessage(message)
 
 
