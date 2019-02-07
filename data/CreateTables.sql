@@ -1,6 +1,6 @@
 create table Series (
 	SeriesName	varchar(20) 	not null,
-	NumberMovies	int,
+	SeriesLength	int,
 	
 	primary key (SeriesName)
 );

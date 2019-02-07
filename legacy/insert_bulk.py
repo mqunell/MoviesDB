@@ -37,5 +37,5 @@ for line in movies_input:
     movie_insertions.append(add_movie_sql(user_data, omdb_data))
 
 
-DbConnection().add_bulk_sql(series_insertions)
-DbConnection().add_bulk_sql(movie_insertions)
+DbConnection().insert_bulk(series_insertions)
+DbConnection().insert_bulk(movie_insertions)

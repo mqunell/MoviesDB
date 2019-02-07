@@ -35,7 +35,7 @@ class TabAddMovies(QWidget):
     def instructions_button_clicked(self):
         instructions = '''
 Type one series or movie per line, in the following formats:
-SeriesName, NumberMovies
+SeriesName, SeriesLength
 Title, SeriesName, SeriesNumber, Format(s)
 
 Enter \"null\" for SeriesName and SeriesNumber if not applicable.
@@ -52,12 +52,12 @@ Inception, null, null, 14
 
     @pyqtSlot()
     def add_button_clicked(self):
-        input = self.text_edit.toPlainText()
+        user_input = self.text_edit.toPlainText()
 
         series_insertions = []
         movie_insertions = []
 
-        for line in input.split('\n'):
+        for line in user_input.split('\n'):
             data = line.split(', ')
 
             if len(data) == 2:
@@ -73,6 +73,7 @@ Inception, null, null, 14
                 movie_insertions.append(add_movie_sql(user_data, omdb_data))
 
         if series_insertions != []:
-            DbConnection().add_bulk_sql(series_insertions)
+            DbConnection().insert_bulk(series_insertions)
+
         if movie_insertions != []:
-            DbConnection().add_bulk_sql(movie_insertions)
+            DbConnection().insert_bulk(movie_insertions)

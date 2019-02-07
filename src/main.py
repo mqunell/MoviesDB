@@ -15,7 +15,7 @@ class App(QMainWindow):
 
         # Window dimensions and positioning
         width = 520
-        height = 465
+        height = 485
         left = (1920 - width) / 2
         top = (1080 - height) / 2
         self.setGeometry(left, top, width, height)
@@ -33,6 +33,10 @@ class App(QMainWindow):
         tabs.addTab(tab3, 'View Movies')
 
         self.setCentralWidget(tabs)
+
+
+    def set_status_bar(self, message):
+        self.statusBar().showMessage(message)
 
 
 if __name__ == '__main__':

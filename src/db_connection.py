@@ -26,33 +26,6 @@ class DbConnection:
                                           cursorclass=pymysql.cursors.DictCursor)
 
 
-    def add(self, gui, user_data):
-        """
-        Controls the flow of checking/adding a series and adding a movie.
-
-        :param gui: The created and initialized GUI
-        :param user_data: Dictionary of user-inputted data
-        """
-
-        series_name = user_data['series_name']
-
-        # If there is a series name
-        if series_name != 'null':
-
-            # If the series isn't found in the database
-            if not self.check_series(series_name):
-
-                # If the series is added to the database
-                if self.add_series(gui, series_name):
-                    self.add_movie(gui, user_data)
-
-            else:
-                self.add_movie(gui, user_data)
-
-        else:
-            self.add_movie(gui, user_data)
-
-
     def check_series(self, series_name):
         """
         Checks if the user-inputted series name already exists in the database.
@@ -79,77 +52,45 @@ class DbConnection:
             raise Exception("Can't access db - check_series")
 
 
-    def add_series(self, gui, series_name):
+    def insert(self, sql_insertion):
         """
-        Adds a series to the database after using a QMessageBox to verify.
+        Adds a single item to the database.
 
-        :param gui: The created and initialized GUI
-        :param series_name: The name of the series being checked
-        :return: True if the series was added; False if not
-        """
-
-        add_series_box = QMessageBox.question(gui, 'Add Series?', 'That series was not found in the database.\nWould you like to add it?', QMessageBox.Yes, QMessageBox.No)
-
-        if add_series_box == QMessageBox.Yes:
-            add_series_num_box = QInputDialog.getInt(gui, 'Series Length?', 'How many movies total are in this series?')
-            number_movies = int(add_series_num_box[0])
-
-            try:
-                with self.connection.cursor() as cursor:
-                    sql = add_series_sql(series_name, number_movies)
-                    cursor.execute(sql)
-
-                self.connection.commit()
-                return True
-
-            except:
-                raise Exception('Can\'t access db - add_series')
-
-        else:
-            return False
-
-
-    def add_movie(self, gui, user_data):
-        """
-        Adds a movie to the database after using a QMessageBox to verify OMDb data.
-
-        :param gui: The created and initialized GUI
-        :param user_data: Dictionary of user-inputted data
-        """
-
-        omdb_data = get_movie_json(user_data['title'])
-        confirm_box = QMessageBox.question(gui, 'Confirm Movie', f'Does this sound right?\n\"{omdb_data["Plot"]}\"', QMessageBox.Yes, QMessageBox.No)
-
-        if confirm_box == QMessageBox.Yes:
-
-            try:
-                with self.connection.cursor() as cursor:
-
-                    sql = add_movie_sql(user_data, omdb_data)
-                    cursor.execute(sql)
-
-                self.connection.commit()
-
-            except:
-                raise Exception('Can\'t access db - add_movie')
-
-
-    def add_bulk_sql(self, insertions):
-        """
-        Adds multiple items to the database.
-
-        :param insertions: List of SQL insert statement strings.
+        :param sql_insertion: The SQL insert statement string.
+        :return: True if successful; False if not.
         """
 
         try:
             with self.connection.cursor() as cursor:
-                for insert in insertions:
+                cursor.execute(sql_insertion)
+
+            self.connection.commit()
+            return True
+
+        except:
+            print('insert exception')
+            return False
+
+
+    def insert_bulk(self, sql_insertions):
+        """
+        Adds multiple items to the database.
+
+        :param sql_insertions: List of SQL insert statement strings.
+        :return: True if all successful; False if not.
+        """
+
+        try:
+            with self.connection.cursor() as cursor:
+                for insert in sql_insertions:
                     cursor.execute(insert)
 
             self.connection.commit()
+            return True
 
         except:
-            raise Exception('Exception - add_bulk_sql')
+            print('insert_bulk exception')
+            return False
 
 
     def get_movies(self):

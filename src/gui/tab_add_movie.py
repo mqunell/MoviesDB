@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import *
 from PyQt5.QtCore import pyqtSlot
 from src.db_connection import DbConnection
+from src.omdb_api import get_movie_json
+from src.sql import add_movie_sql, add_series_sql
 
 
 class TabAddMovie(QWidget):
@@ -146,8 +148,77 @@ class TabAddMovie(QWidget):
                          'series_number': self.series_num_textbox.text(),
                          'formats': formats_output}
 
-            # Pass the main GUI window and user_data to add()
-            DbConnection().add(self.main_gui, user_data)
+            self.add_series(user_data)
 
         else:
-            self.main_gui.statusBar().showMessage('Missing data!')
+            self.main_gui.set_status_bar('Missing data!')
+
+
+    def add_series(self, user_data):
+        """
+        Controls the flow of checking/adding a series and adding a movie. Handles the series portion and calls add_movie
+        to handle the movie portion.
+
+        :param user_data: Dictionary of user-inputted data
+        """
+
+        db_connection = DbConnection()
+
+        series_name = user_data['series_name']
+
+        # If there is a series name
+        if series_name != 'null':
+
+            # If the series isn't in the database
+            if not db_connection.check_series(series_name):
+
+                # Ask about adding the series; if "Yes" selected
+                add_series_box = QMessageBox.question(self.main_gui, 'Add Series?', 'That series was not found in the database.\nWould you like to add it?', QMessageBox.Yes, QMessageBox.No)
+                if add_series_box == QMessageBox.Yes:
+
+                    # Ask about series info; if "Ok" selected
+                    series_length, add_series_length_box = QInputDialog.getInt(self.main_gui, 'Series Length?', 'How many movies total are in this series?', 1, 1, 30, 1)
+                    if add_series_length_box:
+
+                        # If series successfully added
+                        if db_connection.insert(add_series_sql(series_name, series_length)):
+                            self.main_gui.set_status_bar('Series added!')
+                            self.add_movie(user_data)
+
+                        else:
+                            self.main_gui.set_status_bar('Add series failed')
+
+                    else:
+                        self.main_gui.set_status_bar('Series length cancelled')
+
+                else:
+                    self.main_gui.set_status_bar('Add series cancelled')
+
+            else:
+                self.add_movie(user_data)
+
+        else:
+            self.add_movie(user_data)
+
+
+    def add_movie(self, user_data):
+
+        db_connection = DbConnection()
+
+        # Get and check OMDb data
+        omdb_data = get_movie_json(user_data['title'])
+        if 'Plot' in omdb_data.keys:
+
+            # Confirm movie
+            confirm_movie_box = QMessageBox.question(self.main_gui, 'Confirm Movie', f'Does this sound right?\n\"{omdb_data["Plot"]}\"', QMessageBox.Yes, QMessageBox.No)
+
+            # If "Yes" selected
+            if confirm_movie_box == QMessageBox.Yes:
+                if db_connection.insert(add_movie_sql(user_data, omdb_data)):
+                    self.main_gui.set_status_bar('Movie added!')
+
+            else:
+                self.main_gui.set_status_bar('Add movie cancelled')
+
+        else:
+            self.main_gui.set_status_bar('Movie not found on OMDb')
