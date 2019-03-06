@@ -207,7 +207,7 @@ class TabAddMovie(QWidget):
 
         # Get and check OMDb data
         omdb_data = get_movie_json(user_data['title'])
-        if 'Plot' in omdb_data.keys:
+        if 'Plot' in omdb_data.keys():
 
             # Confirm movie
             confirm_movie_box = QMessageBox.question(self.main_gui, 'Confirm Movie', f'Does this sound right?\n\"{omdb_data["Plot"]}\"', QMessageBox.Yes, QMessageBox.No)

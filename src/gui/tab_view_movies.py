@@ -31,6 +31,9 @@ class TabViewMovies(QWidget):
         for movie in movies:
             self.add_movie(table, movie)
 
+        for i in range(13):
+            movies_view.resizeColumnToContents(i)
+
 
     def create_table(self, parent):
         """
