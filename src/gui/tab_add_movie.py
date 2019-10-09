@@ -203,8 +203,6 @@ class TabAddMovie(QWidget):
 
     def add_movie(self, user_data):
 
-        db_connection = DbConnection()
-
         # Get and check OMDb data
         omdb_data = get_movie_json(user_data['title'])
         if 'Plot' in omdb_data.keys():
@@ -214,7 +212,7 @@ class TabAddMovie(QWidget):
 
             # If "Yes" selected
             if confirm_movie_box == QMessageBox.Yes:
-                if db_connection.insert(add_movie_sql(user_data, omdb_data)):
+                if DbConnection().insert(add_movie_sql(user_data, omdb_data)):
                     self.main_gui.set_status_bar('Movie added!')
 
             else:
